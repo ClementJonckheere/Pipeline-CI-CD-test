@@ -1,16 +1,21 @@
-FROM node:20 AS build
+# Utilise une image Node officielle légère
+FROM node:20-alpine
+
+# Dossier de travail dans le conteneur
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install --production
+# Copier les fichiers de dépendances
+COPY source-app/package*.json ./
 
-COPY . .
+# Installer les dépendances (sans les dev si tu veux une image prod)
+RUN npm install
 
-FROM gcr.io/distroless/nodejs20
+# Copier le reste de l'application
+COPY source-app .
 
-WORKDIR /app
-COPY --from=build /app /app
-
+# Exposer le port sur lequel ton serveur écoute
 EXPOSE 3000
 
-CMD ["server.js"]
+# Commande de démarrage du serveur
+# Si ton point d'entrée est serveur.js :
+CMD ["node", "serveur.js"]
