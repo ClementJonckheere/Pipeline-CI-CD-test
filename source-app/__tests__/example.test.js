@@ -32,16 +32,16 @@ describe('GET /', () => {
 describe('POST /sum', () => {
   it('should return the sum of two numbers', async () => {
     const res = await request(app)
-        .post('/sum')
-        .send({ a: 1, b: 2 }); // 1 + 2
+      .post('/sum')
+      .send({ a: 1, b: 2 }); // 1 + 2
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty('result', 3);
   });
 
   it('should return 400 for invalid input', async () => {
     const res = await request(app)
-        .post('/sum')
-        .send({ a: 'foo', b: 2 }); // input invalide
+      .post('/sum')
+      .send({ a: 'foo', b: 2 }); // input invalide
     expect(res.statusCode).toEqual(400);
     expect(res.body).toHaveProperty('error', 'Invalid input');
   });
