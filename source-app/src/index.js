@@ -3,7 +3,6 @@ import express from 'express';
 const app = express();
 const port = 3000;
 
-// Middleware pour analyser les corps de requêtes JSON
 app.use(express.json());
 
 // Route de base
