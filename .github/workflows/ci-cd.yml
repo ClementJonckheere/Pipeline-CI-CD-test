@@ -42,6 +42,7 @@ jobs:
   docker:
     needs: build-test
     runs-on: ubuntu-latest
+    environment: main   # 👈 IMPORTANT : lie ce job à l’environnement "main"
 
     steps:
       - name: Checkout repo
